@@ -1,0 +1,15 @@
+php-fpm:
+  build: php-fpm/.
+  volumes: 
+    - ./webfiles:/srv/http
+  expose: 
+    - "9000"
+nginx:
+  image: nginx
+  ports:
+    - "80:80"
+  volumes:
+    - ./webfiles:/srv/http
+    - ./nginx:/etc/nginx/conf.d
+  links:
+    - php-fpm
